@@ -1,2 +1,2 @@
 # Keep the built single-file site out of the language bar
-docs/** linguist-documentation
+docs/index.html linguist-generated
