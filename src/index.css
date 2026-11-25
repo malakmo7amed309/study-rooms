@@ -1,1 +1,21 @@
+@import "tailwindcss";
 
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+}
+
+body {
+  background-color: #faf5ee;
+  background-image:
+    radial-gradient(55rem 28rem at 90% -10%, rgba(194, 65, 12, 0.08), transparent 60%),
+    radial-gradient(45rem 24rem at -10% 110%, rgba(15, 118, 110, 0.07), transparent 60%);
+  background-attachment: fixed;
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  12% { transform: translateY(-6vh) scale(1.15); opacity: 1; }
+  100% { transform: translateY(-72vh) scale(1); opacity: 0; }
+}
+.float-up { animation: float-up 3.2s ease-out forwards; }
