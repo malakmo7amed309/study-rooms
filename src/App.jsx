@@ -338,7 +338,7 @@ function Room({ code, me, onLeave }) {
 
   const btnBase = 'rounded-xl font-semibold transition-colors'
   const presetsRow = (
-    <div className="flex justify-center gap-2">
+    <div className="flex flex-wrap justify-center gap-2">
       {presets.map((m) => (
         <button
           key={m}
@@ -389,7 +389,7 @@ function Room({ code, me, onLeave }) {
 
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-8 pb-10 grid gap-6 lg:grid-cols-[1fr_320px] items-start">
         {/* timer card */}
-        <section className="rounded-3xl bg-white/70 backdrop-blur border border-stone-200 shadow-xl shadow-orange-900/5 p-6 sm:p-10 flex flex-col items-center gap-6">
+        <section className="min-w-0 rounded-3xl bg-white/70 backdrop-blur border border-stone-200 shadow-xl shadow-orange-900/5 p-6 sm:p-10 flex flex-col items-center gap-6">
           <div className="flex items-center gap-3">
             <span
               className={`text-xs font-bold uppercase tracking-[0.25em] px-3 py-1.5 rounded-full ${
@@ -435,13 +435,13 @@ function Room({ code, me, onLeave }) {
           {/* reactions */}
           <div className="w-full border-t border-stone-200 pt-5">
             <div className="text-xs font-medium text-stone-400 text-center mb-2.5">Send some energy</div>
-            <div className="flex justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
               {REACTIONS.map((e) => (
                 <button
                   key={e}
                   aria-label={'Send ' + e}
                   onClick={() => react(e)}
-                  className="text-2xl w-12 h-12 rounded-2xl bg-white border border-stone-200 hover:scale-110 hover:border-orange-300 transition-transform"
+                  className="text-2xl w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white border border-stone-200 hover:scale-110 hover:border-orange-300 transition-transform"
                 >
                   <ReactIcon name={e} className="mx-auto h-6 w-6" />
                 </button>
@@ -451,7 +451,7 @@ function Room({ code, me, onLeave }) {
         </section>
 
         {/* members card */}
-        <aside className="rounded-3xl bg-white/70 backdrop-blur border border-stone-200 shadow-xl shadow-orange-900/5 p-5">
+        <aside className="min-w-0 rounded-3xl bg-white/70 backdrop-blur border border-stone-200 shadow-xl shadow-orange-900/5 p-5">
           <h2 className="font-display font-semibold text-stone-800">
             In the room <span className="text-stone-400 font-normal">({everyone.length})</span>
           </h2>
