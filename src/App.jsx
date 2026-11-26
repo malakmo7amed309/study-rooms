@@ -1,6 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
+const REACT_PATHS = {
+  coffee: (<><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" fill="#c97a3a" stroke="#7a4a1f" strokeWidth="1.600" strokeLinejoin="round" /><path d="M16 10h1.500a2.500 2.500 0 0 1 0 5H16" fill="none" stroke="#7a4a1f" strokeWidth="1.600" /><path d="M8 3c-1 1.200 1 2 0 3.500M12 3c-1 1.200 1 2 0 3.500" fill="none" stroke="#a8a29e" strokeWidth="1.500" strokeLinecap="round" /></>),
+  fire: (<path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 2 3 4 1-3 1-6 1-9z" fill="#f97316" stroke="#c2410c" strokeWidth="1.400" strokeLinejoin="round" />),
+  clap: (<><path d="M5 14l4-8 3 2 2-3 4 5-2 8-6 2z" fill="#fbbf24" stroke="#b45309" strokeWidth="1.500" strokeLinejoin="round" /><path d="M3 8l1.500 1M6 3l1 1.500M20 4l-1 1.500" stroke="#b45309" strokeWidth="1.500" strokeLinecap="round" /></>),
+  strong: (<path d="M4 14c2-1 3-4 5-5l3 1 3-4 4 3-3 7c-1 2-3 4-6 4s-6-2-6-6z" fill="#fbbf24" stroke="#b45309" strokeWidth="1.500" strokeLinejoin="round" />),
+  party: (<><path d="M3 21l5-13 8 8z" fill="#ec4899" stroke="#9d174d" strokeWidth="1.500" strokeLinejoin="round" /><path d="M12 5l1-2M16 8l3-1M17 4l1 1.500M20 12l1.500.5" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" /></>),
+  book: (<><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z" fill="#60a5fa" stroke="#1d4ed8" strokeWidth="1.500" strokeLinejoin="round" /><path d="M8 17h11" stroke="#1d4ed8" strokeWidth="1.500" /></>),
+}
+
+function ReactIcon({ name, className = '' }) {
+  return <svg viewBox="0 0 24 24" className={className} aria-hidden="true">{REACT_PATHS[name] || <circle cx="12" cy="12" r="6" fill="#d6d3d1" />}</svg>
+}
+
 const SUPABASE_URL = 'https://uijyoxkppndiyboguhzm.supabase.co'
 const SUPABASE_KEY = 'sb_publishable_ntTZHgBcoK8a5_EQwVepIQ_60e9yDPg'
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
@@ -10,7 +23,7 @@ const FOCUS_PRESETS = [15, 25, 45]
 const BREAK_PRESETS = [5, 10]
 const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'
 const AVATAR_COLORS = ['#c2410c', '#b45309', '#a16207', '#4d7c0f', '#0f766e', '#0e7490', '#7c3aed', '#be185d']
-const REACTIONS = ['☕', '🔥', '👏', '💪', '🎉', '📚']
+const REACTIONS = ['coffee', 'fire', 'clap', 'strong', 'party', 'book']
 
 function makeCode() {
   let c = ''
@@ -75,7 +88,7 @@ function Home({ onJoin }) {
     <div className="min-h-screen flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="text-5xl mb-3">☕</div>
+          <div className="mb-3 flex justify-center text-orange-500"><ReactIcon name="coffee" className="h-12 w-12" /></div>
           <h1 className="font-display text-4xl sm:text-5xl font-semibold text-stone-900 tracking-tight">
             Study Rooms
           </h1>
@@ -348,7 +361,7 @@ function Room({ code, me, onLeave }) {
       <div className="pointer-events-none fixed inset-0 overflow-hidden z-40">
         {floats.map((f) => (
           <div key={f.id} className="float-up absolute bottom-8 text-4xl" style={{ left: `${f.x}%` }}>
-            {f.emoji}
+            <ReactIcon name={f.emoji} className="mx-auto h-10 w-10" />
             <span className="block text-xs font-medium text-center mt-1" style={{ color: f.color }}>{f.name}</span>
           </div>
         ))}
@@ -357,7 +370,7 @@ function Room({ code, me, onLeave }) {
       {/* header */}
       <header className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-8 py-4">
         <button onClick={onLeave} className="font-display text-xl font-semibold text-stone-800">
-          ☕ Study Rooms
+          <ReactIcon name="coffee" className="mr-1.5 inline h-6 w-6 align-[-5px] text-orange-500" />Study Rooms
         </button>
         <div className="flex items-center gap-2">
           <span className="hidden sm:inline text-sm text-stone-500">room</span>
@@ -426,10 +439,11 @@ function Room({ code, me, onLeave }) {
               {REACTIONS.map((e) => (
                 <button
                   key={e}
+                  aria-label={'Send ' + e}
                   onClick={() => react(e)}
                   className="text-2xl w-12 h-12 rounded-2xl bg-white border border-stone-200 hover:scale-110 hover:border-orange-300 transition-transform"
                 >
-                  {e}
+                  <ReactIcon name={e} className="mx-auto h-6 w-6" />
                 </button>
               ))}
             </div>
