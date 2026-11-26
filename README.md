@@ -1,4 +1,4 @@
-# ☕ Study Rooms
+# Study Rooms
 
 Shared Pomodoro rooms, synced live. Create a room, send the code or invite link, and everyone studies on the same timer. No sign-up, no database, just a link.
 
